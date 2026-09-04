@@ -17,6 +17,9 @@ release/
 # Local design iterations
 design/
 
+# Separate GitHub Wiki checkout
+wiki/
+
 # Logs and crash output
 *.log
 crash-reports/
