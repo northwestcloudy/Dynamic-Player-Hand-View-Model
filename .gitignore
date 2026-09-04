@@ -1,0 +1,23 @@
+# Gradle
+.gradle/
+build/
+
+# Minecraft development runtime
+run/
+
+# Local release staging
+release/
+
+# IDEs and operating systems
+.idea/
+.vscode/
+*.iml
+.DS_Store
+
+# Local design iterations
+design/
+
+# Logs and crash output
+*.log
+crash-reports/
+hs_err_pid*

@@ -1,0 +1,16 @@
+{
+	"required": true,
+	"package": "com.northwestcloudymac.dynamicplayermodel.mixin",
+	"compatibilityLevel": "JAVA_25",
+	"client": [
+		"HumanoidArmorLayerMixin",
+		"ItemInHandRendererMixin",
+		"PlayerModelMixin"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	},
+	"overwrites": {
+		"requireAnnotations": true
+	}
+}

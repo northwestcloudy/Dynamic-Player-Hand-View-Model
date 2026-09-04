@@ -1,0 +1,39 @@
+{
+	"schemaVersion": 1,
+	"id": "dynamic_player_model",
+	"version": "${version}",
+	"name": "Dynamic Player Model",
+	"description": "Client-side visual player proportions and first-person hand transforms for Minecraft 26.2.",
+	"icon": "assets/dynamic_player_model/icon.png",
+	"authors": [
+		"northwestcloudymac"
+	],
+	"license": "MIT",
+	"environment": "client",
+	"entrypoints": {
+		"client": [
+			"com.northwestcloudymac.dynamicplayermodel.DynamicPlayerModelClient"
+		],
+		"modmenu": [
+			"com.northwestcloudymac.dynamicplayermodel.compat.DynamicPlayerModelModMenu"
+		]
+	},
+	"mixins": [
+		"dynamic_player_model.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.19.3",
+		"minecraft": "26.2",
+		"java": ">=25",
+		"fabric-api": ">=0.156.0+26.2"
+	},
+	"suggests": {
+		"modmenu": "*",
+		"sodium": "*",
+		"iris": "*"
+	},
+	"breaks": {
+		"viewmodel": "*",
+		"scaleme": "*"
+	}
+}

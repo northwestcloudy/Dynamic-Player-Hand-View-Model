@@ -1,0 +1,96 @@
+plugins {
+	id 'net.fabricmc.fabric-loom' version "${loom_version}"
+	id 'maven-publish'
+}
+
+version = project.mod_version
+group = project.maven_group
+
+def projectDescription = "Client-side visual player proportions and first-person hand transforms for Minecraft 26.2."
+def resolvedModVersion = version.toString()
+def resolvedArchivesBaseName = project.archives_base_name.toString()
+
+base {
+	archivesName = project.archives_base_name
+}
+
+repositories {
+	maven {
+		name = 'TerraformersMC'
+		url = 'https://maven.terraformersmc.com/releases/'
+	}
+}
+
+loom {
+	mods {
+		"dynamic_player_model" {
+			sourceSet sourceSets.main
+		}
+	}
+}
+
+dependencies {
+	minecraft "com.mojang:minecraft:${project.minecraft_version}"
+	implementation "net.fabricmc:fabric-loader:${project.loader_version}"
+	implementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
+	compileOnly "com.terraformersmc:modmenu:${project.modmenu_version}"
+	runtimeOnly "com.terraformersmc:modmenu:${project.modmenu_version}"
+}
+
+processResources {
+	inputs.property "version", resolvedModVersion
+
+	filesMatching("fabric.mod.json") {
+		expand "version": resolvedModVersion
+	}
+}
+
+tasks.withType(JavaCompile).configureEach {
+	it.options.release = 25
+	it.options.encoding = "UTF-8"
+}
+
+java {
+	sourceCompatibility = JavaVersion.VERSION_25
+	targetCompatibility = JavaVersion.VERSION_25
+	withSourcesJar()
+}
+
+tasks.withType(AbstractArchiveTask).configureEach {
+	preserveFileTimestamps = false
+	reproducibleFileOrder = true
+}
+
+tasks.withType(Jar).configureEach {
+	from("LICENSE") {
+		into("META-INF")
+		rename { "${it}_${resolvedArchivesBaseName}" }
+	}
+	from("THIRD_PARTY_NOTICES.md") {
+		into("META-INF")
+		rename { "THIRD_PARTY_NOTICES_${resolvedArchivesBaseName}.md" }
+	}
+	from("LICENSES") {
+		into("META-INF/licenses")
+	}
+}
+
+publishing {
+	publications {
+		create("mavenJava", MavenPublication) {
+			from components.java
+
+			pom {
+				name = "Dynamic Player Model"
+				description = projectDescription
+				licenses {
+					license {
+						name = "MIT License"
+						url = "https://spdx.org/licenses/MIT.html"
+						distribution = "repo"
+					}
+				}
+			}
+		}
+	}
+}
