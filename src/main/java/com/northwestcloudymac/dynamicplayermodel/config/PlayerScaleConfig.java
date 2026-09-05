@@ -3,13 +3,12 @@ package com.northwestcloudymac.dynamicplayermodel.config;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonParseException;
-import com.northwestcloudymac.dynamicplayermodel.DynamicPlayerModelClient;
+import com.northwestcloudymac.dynamicplayermodel.DynamicPlayerModel;
 import java.io.IOException;
 import java.io.Reader;
 import java.io.Writer;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.entity.state.AvatarRenderState;
@@ -17,7 +16,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public final class PlayerScaleConfig {
-	private static final Logger LOGGER = LoggerFactory.getLogger(DynamicPlayerModelClient.MOD_ID);
+	private static final Logger LOGGER = LoggerFactory.getLogger(DynamicPlayerModel.MOD_ID);
 	private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
 	private static final int CURRENT_VERSION = 4;
 	private static final float MIN_SCALE = 0.05F;
@@ -31,6 +30,7 @@ public final class PlayerScaleConfig {
 	private static final float MAX_ROTATION = 45.0F;
 
 	private static PlayerScaleConfig instance = defaults();
+	private static Path configDirectory = Path.of("config");
 
 	public int configVersion;
 	public boolean enabled;
@@ -74,7 +74,12 @@ public final class PlayerScaleConfig {
 		return config;
 	}
 
-	public static void load() {
+	public static void initialize(Path directory) {
+		configDirectory = directory;
+		load();
+	}
+
+	private static void load() {
 		Path path = configPath();
 
 		if (Files.notExists(path)) {
@@ -213,6 +218,6 @@ public final class PlayerScaleConfig {
 	}
 
 	private static Path configPath() {
-		return FabricLoader.getInstance().getConfigDir().resolve("dynamic_player_model.json");
+		return configDirectory.resolve("dynamic_player_model.json");
 	}
 }

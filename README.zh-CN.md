@@ -3,7 +3,8 @@
 > **非官方社区项目：** 本项目不是 Minecraft 官方产品，未得到 Mojang 或
 > Microsoft 的批准，也不与其存在关联。
 
-Dynamic Player Model 是面向 Minecraft 26.2 的轻量 Fabric 纯客户端 Mod，
+Dynamic Player Model 是面向 Minecraft 26.2 的轻量纯客户端 Mod，支持
+Fabric、Forge 和 NeoForge，
 用于调整第三人称玩家头身比例，以及第一人称主手、副手和物品的显示矩阵。
 
 本 Mod 只修改渲染，不修改碰撞箱、实体尺寸、眼睛高度、攻击或交互距离、
@@ -18,15 +19,20 @@ Dynamic Player Model 是面向 Minecraft 26.2 的轻量 Fabric 纯客户端 Mod�
 - 第一人称物品最小可缩放到 1%，最大不超过原版。
 - 可缩短或隐藏空手手臂。
 - 持有地图时自动绕过 View Model 变换，并可选择单手或双手地图显示。
-- 默认按 `F8` 打开设置，也支持 Mod Menu 和自定义按键。
+- 默认按 `F8` 打开设置；Fabric 支持 Mod Menu，Forge 和 NeoForge 支持
+  加载器 Mods 页面中的设置按钮。
 
 ## 安装要求
 
 - Minecraft 26.2
 - Java 25 或更高版本
-- Fabric Loader 0.19.3 或更高版本
-- Fabric API 0.156.0+26.2 或兼容的新版本
-- Mod Menu 20.0.1 为可选依赖
+- 以下加载器之一：Fabric Loader 0.19.3+、Forge 65.1.3+ 或 NeoForge
+  26.2.0.75+
+- Fabric 版本需要 Fabric API 0.156.0+26.2 或兼容的新版本
+- Mod Menu 20.0.1 仅为 Fabric 版本的可选依赖
+
+请将与加载器相符的 `-fabric`、`-forge` 或 `-neoforge` JAR 放入 `mods`
+目录，同一个游戏实例中不要同时安装多个加载器版本。
 
 安装本 Mod 前，需要移除独立的 View Model 和 ScaleMe，避免重复修改相同的
 渲染路径。
@@ -53,10 +59,11 @@ Dynamic Player Model 是面向 Minecraft 26.2 的轻量 Fabric 纯客户端 Mod�
 使用 Java 25 执行：
 
 ```bash
-./gradlew clean build
+./gradlew clean buildAllPlatforms
 ```
 
-产物位于 `build/libs/`。
+Fabric 产物位于 `build/libs/`，Forge 产物位于 `forge/build/libs/`，
+NeoForge 产物位于 `neoforge/build/libs/`。
 
 ## 协议与参考项目
 

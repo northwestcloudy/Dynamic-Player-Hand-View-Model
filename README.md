@@ -3,8 +3,8 @@
 > **Unofficial community project:** NOT AN OFFICIAL MINECRAFT PRODUCT. NOT
 > APPROVED BY OR ASSOCIATED WITH MOJANG OR MICROSOFT.
 
-Dynamic Player Model is a lightweight, client-side Fabric mod for Minecraft
-26.2. It provides visual player-model proportions in third person and
+Dynamic Player Model is a lightweight, client-side mod for Minecraft 26.2 on
+Fabric, Forge, and NeoForge. It provides visual player-model proportions in third person and
 independent first-person hand and item transforms.
 
 The mod changes rendering only. It does not change hitboxes, entity dimensions,
@@ -22,24 +22,29 @@ eye height, reach, movement, combat attributes, item data, or server state.
 - Shorten or hide empty first-person hands.
 - Automatically bypass View Model transforms for maps, with a one-hand or
   two-hand map mode.
-- Open the settings with a rebindable key, or through Mod Menu.
+- Open the settings with a rebindable key, through Mod Menu on Fabric, or
+  through the Mods screen on Forge and NeoForge.
 - Store all settings locally in `config/dynamic_player_model.json`.
 
 ## Requirements
 
 - Minecraft 26.2
 - Java 25 or newer
-- Fabric Loader 0.19.3 or newer
-- Fabric API 0.156.0+26.2 or a compatible newer release
-- Mod Menu 20.0.1 is optional
+- One supported loader: Fabric Loader 0.19.3+, Forge 65.1.3+, or NeoForge
+  26.2.0.75+
+- Fabric builds require Fabric API 0.156.0+26.2 or a compatible newer release
+- Mod Menu 20.0.1 is optional for the Fabric build
 
 ## Installation
 
-1. Install Fabric Loader and Fabric API for Minecraft 26.2.
-2. Put the Dynamic Player Model JAR in the instance's `mods` directory.
+1. Install Fabric, Forge, or NeoForge for Minecraft 26.2. Install Fabric API
+   when using the Fabric build.
+2. Put the matching `-fabric`, `-forge`, or `-neoforge` JAR in the instance's
+   `mods` directory. Do not install more than one loader build.
 3. Remove standalone View Model or ScaleMe installations. Fabric metadata marks
    them as incompatible because they modify overlapping rendering paths.
-4. Start the game and press `F8`, or open the configuration through Mod Menu.
+4. Start the game and press `F8`. Fabric users can also use Mod Menu; Forge and
+   NeoForge users can use the loader's Mods screen.
 
 The empty-hand visibility shortcut is unbound by default and can be assigned in
 Minecraft's Controls screen.
@@ -89,11 +94,12 @@ Dynamic Player Model.
 Clone the repository and run:
 
 ```bash
-./gradlew clean build
+./gradlew clean buildAllPlatforms
 ```
 
-The main JAR and source JAR are written to `build/libs/`. The build requires a
-Java 25 JDK. GitHub Actions runs the same command for pushes and pull requests.
+The Fabric JAR is written to `build/libs/`, with Forge and NeoForge JARs in
+`forge/build/libs/` and `neoforge/build/libs/`. The build requires a Java 25
+JDK. GitHub Actions runs the same command for pushes and pull requests.
 
 ## License and acknowledgements
 

@@ -6,9 +6,20 @@ plugins {
 version = project.mod_version
 group = project.maven_group
 
-def projectDescription = "Client-side visual player proportions and first-person hand transforms for Minecraft 26.2."
+def projectDescription = project.mod_description.toString()
 def resolvedModVersion = version.toString()
 def resolvedArchivesBaseName = project.archives_base_name.toString()
+def fabricMetadata = [
+	version: resolvedModVersion,
+	mod_id: project.mod_id,
+	mod_name: project.mod_name,
+	mod_description: project.mod_description,
+	mod_authors: project.mod_authors,
+	mod_license: project.mod_license,
+	minecraft_version: project.minecraft_version,
+	loader_version: project.loader_version,
+	fabric_api_version: project.fabric_api_version
+]
 
 base {
 	archivesName = project.archives_base_name
@@ -29,6 +40,16 @@ loom {
 	}
 }
 
+tasks.named('jar', Jar) {
+	archiveClassifier = 'fabric'
+}
+
+tasks.register('buildAllPlatforms') {
+	group = 'build'
+	description = 'Builds the Fabric, Forge, and NeoForge client jars.'
+	dependsOn 'build', ':forge:build', ':neoforge:build'
+}
+
 dependencies {
 	minecraft "com.mojang:minecraft:${project.minecraft_version}"
 	implementation "net.fabricmc:fabric-loader:${project.loader_version}"
@@ -38,10 +59,10 @@ dependencies {
 }
 
 processResources {
-	inputs.property "version", resolvedModVersion
+	inputs.properties fabricMetadata
 
 	filesMatching("fabric.mod.json") {
-		expand "version": resolvedModVersion
+		expand fabricMetadata
 	}
 }
 
@@ -54,6 +75,10 @@ java {
 	sourceCompatibility = JavaVersion.VERSION_25
 	targetCompatibility = JavaVersion.VERSION_25
 	withSourcesJar()
+}
+
+tasks.named('sourcesJar', Jar) {
+	archiveClassifier = 'fabric-sources'
 }
 
 tasks.withType(AbstractArchiveTask).configureEach {
@@ -81,7 +106,7 @@ publishing {
 			from components.java
 
 			pom {
-				name = "Dynamic Player Model"
+				name = project.mod_name
 				description = projectDescription
 				licenses {
 					license {
