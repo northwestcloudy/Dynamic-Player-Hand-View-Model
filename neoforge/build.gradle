@@ -1,0 +1,89 @@
+plugins {
+	id 'java-library'
+	id 'idea'
+	id 'net.neoforged.moddev' version "${moddevgradle_version}"
+}
+
+version = rootProject.mod_version
+group = rootProject.maven_group
+
+def metadataProperties = [
+	mod_id: rootProject.mod_id,
+	mod_name: rootProject.mod_name,
+	mod_version: rootProject.mod_version,
+	mod_description: rootProject.mod_description,
+	mod_authors: rootProject.mod_authors,
+	mod_license: rootProject.mod_license,
+	neoforge_loader_version_range: rootProject.neoforge_loader_version_range,
+	neoforge_version_range: rootProject.neoforge_version_range,
+	minecraft_version_range: rootProject.minecraft_version_range
+]
+
+base {
+	archivesName = rootProject.archives_base_name
+}
+
+java.toolchain.languageVersion = JavaLanguageVersion.of(25)
+
+sourceSets {
+	main {
+		java {
+			srcDir rootProject.file('src/main/java')
+			exclude 'com/northwestcloudymac/dynamicplayermodel/DynamicPlayerModelClient.java'
+			exclude 'com/northwestcloudymac/dynamicplayermodel/compat/**'
+		}
+		resources {
+			srcDir rootProject.file('src/main/resources')
+			exclude 'fabric.mod.json'
+		}
+	}
+}
+
+neoForge {
+	version = rootProject.neoforge_version
+	runs {
+		client {
+			client()
+		}
+	}
+	mods {
+		"${rootProject.archives_base_name.replace('-', '_')}" {
+			sourceSet(sourceSets.main)
+		}
+	}
+}
+
+tasks.withType(JavaCompile).configureEach {
+	options.release = 25
+	options.encoding = 'UTF-8'
+	options.compilerArgs.add('-Xlint:deprecation')
+}
+
+tasks.named('downloadAssets') {
+	javaExecutable.set(javaToolchains.launcherFor {
+		languageVersion = JavaLanguageVersion.of(25)
+	}.map { it.executablePath.asFile.absolutePath })
+}
+
+tasks.named('processResources', ProcessResources) {
+	duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+	inputs.properties metadataProperties
+	filesMatching('META-INF/neoforge.mods.toml') {
+		expand metadataProperties
+	}
+}
+
+tasks.named('jar', Jar) {
+	archiveClassifier = 'neoforge'
+	from(rootProject.file('LICENSE')) {
+		into('META-INF')
+		rename { "${it}_${rootProject.archives_base_name}" }
+	}
+	from(rootProject.file('THIRD_PARTY_NOTICES.md')) {
+		into('META-INF')
+		rename { "THIRD_PARTY_NOTICES_${rootProject.archives_base_name}.md" }
+	}
+	from(rootProject.file('LICENSES')) {
+		into('META-INF/licenses')
+	}
+}

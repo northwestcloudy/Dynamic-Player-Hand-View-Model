@@ -4,9 +4,14 @@ pluginManagement {
 			name = 'Fabric'
 			url = 'https://maven.fabricmc.net/'
 		}
+		maven {
+			name = 'MinecraftForge'
+			url = 'https://maven.minecraftforge.net/'
+		}
 		mavenCentral()
 		gradlePluginPortal()
 	}
 }
 
 rootProject.name = 'dynamic-player-model'
+include 'forge', 'neoforge'

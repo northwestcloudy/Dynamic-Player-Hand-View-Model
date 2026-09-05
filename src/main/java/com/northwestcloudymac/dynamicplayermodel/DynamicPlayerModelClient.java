@@ -6,21 +6,21 @@ import com.mojang.blaze3d.platform.InputConstants;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keymapping.v1.KeyMappingHelper;
 import net.fabricmc.api.ClientModInitializer;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.resources.Identifier;
 import org.lwjgl.glfw.GLFW;
 
 public final class DynamicPlayerModelClient implements ClientModInitializer {
-	public static final String MOD_ID = "dynamic_player_model";
 	private static final KeyMapping.Category CATEGORY = KeyMapping.Category.register(
-			Identifier.fromNamespaceAndPath(MOD_ID, "main")
+			Identifier.fromNamespaceAndPath(DynamicPlayerModel.MOD_ID, "main")
 	);
 	private static KeyMapping openConfigKey;
 	private static KeyMapping toggleHideEmptyHandsKey;
 
 	@Override
 	public void onInitializeClient() {
-		PlayerScaleConfig.load();
+		DynamicPlayerModel.initialize(FabricLoader.getInstance().getConfigDir());
 		registerKeyMappings();
 	}
 
