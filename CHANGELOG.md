@@ -2,6 +2,14 @@
 
 All notable changes to Dynamic Player Model are documented here.
 
+## [1.0.7+26.3] - 2026-11-27
+
+### Changed
+
+- Ported the existing player scaling and first-person view model to Minecraft
+  26.3 on Fabric, Forge, and NeoForge.
+- Updated the game, loader, and resource pack requirements for Minecraft 26.3.
+
 ## [1.0.7+26.2] - 2026-08-25
 
 ### Changed

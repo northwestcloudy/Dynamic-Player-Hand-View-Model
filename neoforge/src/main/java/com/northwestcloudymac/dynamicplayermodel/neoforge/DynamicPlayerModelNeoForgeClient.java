@@ -16,7 +16,6 @@ import net.neoforged.neoforge.client.event.ClientTickEvent;
 import net.neoforged.neoforge.client.event.RegisterKeyMappingsEvent;
 import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
 import net.neoforged.neoforge.common.NeoForge;
-import org.lwjgl.glfw.GLFW;
 
 @Mod(value = DynamicPlayerModel.MOD_ID, dist = Dist.CLIENT)
 public final class DynamicPlayerModelNeoForgeClient {
@@ -40,14 +39,12 @@ public final class DynamicPlayerModelNeoForgeClient {
 		event.registerCategory(CATEGORY);
 		openConfigKey = new KeyMapping(
 				"key.dynamic_player_model.open_config",
-				InputConstants.Type.KEYSYM,
-				GLFW.GLFW_KEY_F8,
+			InputConstants.KEY_F8,
 				CATEGORY
 		);
 		toggleHideEmptyHandsKey = new KeyMapping(
 				"key.dynamic_player_model.toggle_hide_empty_hands",
-				InputConstants.Type.KEYSYM,
-				GLFW.GLFW_KEY_UNKNOWN,
+			InputConstants.UNKNOWN.getValue(),
 				CATEGORY
 		);
 		event.register(openConfigKey);

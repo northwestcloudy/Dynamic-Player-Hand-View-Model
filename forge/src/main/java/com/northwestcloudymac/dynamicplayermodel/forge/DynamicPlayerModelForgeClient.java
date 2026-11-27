@@ -15,7 +15,6 @@ import net.minecraftforge.eventbus.api.listener.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.loading.FMLPaths;
-import org.lwjgl.glfw.GLFW;
 
 @Mod(DynamicPlayerModel.MOD_ID)
 public final class DynamicPlayerModelForgeClient {
@@ -46,14 +45,12 @@ public final class DynamicPlayerModelForgeClient {
 		public static void registerKeyMappings(RegisterKeyMappingsEvent event) {
 			openConfigKey = new KeyMapping(
 					"key.dynamic_player_model.open_config",
-					InputConstants.Type.KEYSYM,
-					GLFW.GLFW_KEY_F8,
+					InputConstants.KEY_F8,
 					CATEGORY
 			);
 			toggleHideEmptyHandsKey = new KeyMapping(
 					"key.dynamic_player_model.toggle_hide_empty_hands",
-					InputConstants.Type.KEYSYM,
-					GLFW.GLFW_KEY_UNKNOWN,
+					InputConstants.UNKNOWN.getValue(),
 					CATEGORY
 			);
 			event.register(openConfigKey);

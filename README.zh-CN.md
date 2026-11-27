@@ -3,7 +3,7 @@
 > **非官方社区项目：** 本项目不是 Minecraft 官方产品，未得到 Mojang 或
 > Microsoft 的批准，也不与其存在关联。
 
-Dynamic Player Model 是面向 Minecraft 26.2 的轻量纯客户端 Mod，支持
+Dynamic Player Model 是面向 Minecraft 26.3 的轻量纯客户端 Mod，支持
 Fabric、Forge 和 NeoForge，
 用于调整第三人称玩家头身比例，以及第一人称主手、副手和物品的显示矩阵。
 
@@ -24,12 +24,12 @@ Fabric、Forge 和 NeoForge，
 
 ## 安装要求
 
-- Minecraft 26.2
+- Minecraft 26.3
 - Java 25 或更高版本
-- 以下加载器之一：Fabric Loader 0.19.3+、Forge 65.1.3+ 或 NeoForge
-  26.2.0.75+
-- Fabric 版本需要 Fabric API 0.156.0+26.2 或兼容的新版本
-- Mod Menu 20.0.1 仅为 Fabric 版本的可选依赖
+- 以下加载器之一：Fabric Loader 0.20.1+、Forge 66.1.9+ 或 NeoForge
+  26.3.0.118+
+- Fabric 版本需要 Fabric API 0.166.2+26.3 或兼容的新版本
+- Mod Menu 21.0.1 仅为 Fabric 版本的可选依赖
 
 请将与加载器相符的 `-fabric`、`-forge` 或 `-neoforge` JAR 放入 `mods`
 目录，同一个游戏实例中不要同时安装多个加载器版本。
