@@ -9,7 +9,6 @@ import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.resources.Identifier;
-import org.lwjgl.glfw.GLFW;
 
 public final class DynamicPlayerModelClient implements ClientModInitializer {
 	private static final KeyMapping.Category CATEGORY = KeyMapping.Category.register(
@@ -27,14 +26,12 @@ public final class DynamicPlayerModelClient implements ClientModInitializer {
 	private static void registerKeyMappings() {
 		openConfigKey = KeyMappingHelper.registerKeyMapping(new KeyMapping(
 				"key.dynamic_player_model.open_config",
-				InputConstants.Type.KEYSYM,
-				GLFW.GLFW_KEY_F8,
+			InputConstants.KEY_F8,
 				CATEGORY
 		));
 		toggleHideEmptyHandsKey = KeyMappingHelper.registerKeyMapping(new KeyMapping(
 				"key.dynamic_player_model.toggle_hide_empty_hands",
-				InputConstants.Type.KEYSYM,
-				GLFW.GLFW_KEY_UNKNOWN,
+			InputConstants.UNKNOWN.getValue(),
 				CATEGORY
 		));
 

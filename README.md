@@ -3,7 +3,7 @@
 > **Unofficial community project:** NOT AN OFFICIAL MINECRAFT PRODUCT. NOT
 > APPROVED BY OR ASSOCIATED WITH MOJANG OR MICROSOFT.
 
-Dynamic Player Model is a lightweight, client-side mod for Minecraft 26.2 on
+Dynamic Player Model is a lightweight, client-side mod for Minecraft 26.3 on
 Fabric, Forge, and NeoForge. It provides visual player-model proportions in third person and
 independent first-person hand and item transforms.
 
@@ -28,20 +28,20 @@ eye height, reach, movement, combat attributes, item data, or server state.
 
 ## Requirements
 
-- Minecraft 26.2
+- Minecraft 26.3
 - Java 25 or newer
-- One supported loader: Fabric Loader 0.19.3+, Forge 65.1.3+, or NeoForge
-  26.2.0.75+
-- Fabric builds require Fabric API 0.156.0+26.2 or a compatible newer release
-- Mod Menu 20.0.1 is optional for the Fabric build
+- One supported loader: Fabric Loader 0.20.1+, Forge 66.1.9+, or NeoForge
+  26.3.0.118+
+- Fabric builds require Fabric API 0.166.2+26.3 or a compatible newer release
+- Mod Menu 21.0.1 is optional for the Fabric build
 
 ## Installation
 
-1. Install Fabric, Forge, or NeoForge for Minecraft 26.2. Install Fabric API
+1. Install Fabric, Forge, or NeoForge for Minecraft 26.3. Install Fabric API
    when using the Fabric build.
 2. Put the matching `-fabric`, `-forge`, or `-neoforge` JAR in the instance's
    `mods` directory. Do not install more than one loader build.
-3. Remove standalone View Model or ScaleMe installations. Fabric metadata marks
+3. Remove standalone View Model or ScaleMe installations. Fabric and NeoForge metadata mark
    them as incompatible because they modify overlapping rendering paths.
 4. Start the game and press `F8`. Fabric users can also use Mod Menu; Forge and
    NeoForge users can use the loader's Mods screen.
